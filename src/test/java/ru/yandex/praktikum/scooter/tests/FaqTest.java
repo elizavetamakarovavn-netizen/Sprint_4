@@ -1,12 +1,10 @@
 package ru.yandex.praktikum.scooter.tests;
 
-
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.openqa.selenium.WebDriver;
+//import org.openqa.selenium.WebDriver;
 import ru.yandex.praktikum.scooter.pageobject.MainPage;
 import static org.junit.Assert.assertEquals;
 
@@ -44,10 +42,9 @@ public class FaqTest {
 
     @Test
     public void testFaqAnswers() {
-        WebDriver driver = factory.getDriver();
         MainPage mainPage = factory.getMainPage();
         String actualAnswer = mainPage.getFaqAnswerByIndex(questionIndex);
-        assertEquals("Ответ на вопрос №" + questionIndex + " некорректный",
+        assertEquals("Ответ на вопрос № " + questionIndex + 1 + " некорректный",
                 expectedAnswer, actualAnswer);
     }
 }

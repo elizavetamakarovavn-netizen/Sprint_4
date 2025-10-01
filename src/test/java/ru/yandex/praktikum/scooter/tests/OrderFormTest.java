@@ -77,15 +77,14 @@ public class OrderFormTest {
         orderPage.setComment(comment);
         orderPage.clickOrder();
 
-        String modalText = orderPage.getModalHeaderText();
-        assertTrue("Ожидался текст с 'Хотите оформить заказ', но был: " + modalText,
-                modalText.contains("Хотите оформить заказ"));
-
+        boolean isModalDisplayed = orderPage.isModalHeaderDisplayed();
+        assertTrue("Ожидалось, что появится попап 'Хотите оформить заказ', но он не появился", isModalDisplayed);
 
         orderPage.confirmOrder();
 
-        String confirmedText = orderPage.getOrderConfirmedHeaderText();
-        assertTrue("Ожидался текст с 'Заказ оформлен', но был: " + confirmedText, confirmedText.contains("Заказ оформлен"));
+        boolean isConfirmedDisplayed = orderPage.isOrderConfirmedHeaderDisplayed();
+        assertTrue("Ожидалось, что появится попап 'Заказ оформлен', но он не появился", isConfirmedDisplayed);
+
     }
 }
 

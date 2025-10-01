@@ -14,7 +14,8 @@ public class OrderPage {
     public OrderPage(WebDriver driver) {
         this.driver = driver;
     }
-
+    // Заголовок формы
+    private final By orderFormHeader = By.className("Order_Header__BZXOb");
     //Кнопка закрытия баннера куки
     private final By cookieButton = By.id("rcc-confirm-button");
 
@@ -127,11 +128,11 @@ public class OrderPage {
     // Клик по кнопке "Заказать"
     public void clickOrder() {driver.findElement(orderButton).click();}
 
-    // Проверка появления попапа "Хотите оформить заказ?"
-    public String getModalHeaderText() {
+    // Проверка появления заголовка попапа "Хотите оформить заказ?"
+    public boolean isModalHeaderDisplayed() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(EXPLICITY_TIMEOUT));
         WebElement header = wait.until(ExpectedConditions.visibilityOfElementLocated(modalHeader));
-        return header.getText();
+        return header.isDisplayed();
     }
 
     // Клик по кнопке "Да" в попапе
@@ -139,9 +140,11 @@ public class OrderPage {
         driver.findElement(confirmButton).click();
     }
 
-    // Проверка появления попапа "Заказ оформлен"
-    public String getOrderConfirmedHeaderText() {
-        return driver.findElement(orderConfirmedHeader).getText();
+    // Проверка появления заголовка попапа подтверждения заказа
+    public boolean isOrderConfirmedHeaderDisplayed() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(EXPLICITY_TIMEOUT));
+        WebElement header = wait.until(ExpectedConditions.visibilityOfElementLocated(orderConfirmedHeader));
+        return header.isDisplayed();
     }
 
     //Закрытие куки
@@ -149,6 +152,11 @@ public class OrderPage {
         if (!driver.findElements(cookieButton).isEmpty()) {
             driver.findElement(cookieButton).click();
         }
+    }
+    // Заголовок формы
+    public By getOrderFormHeader() {
+        return orderFormHeader;
+    }
 }
-}
+
 

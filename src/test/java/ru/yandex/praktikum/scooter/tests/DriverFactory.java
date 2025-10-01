@@ -4,12 +4,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.yandex.praktikum.scooter.pageobject.MainPage;
+import ru.yandex.praktikum.scooter.pageobject.OrderPage;
+
 import java.time.Duration;
 import static ru.yandex.praktikum.scooter.pageobject.util.EnvConfig.IMPLICITY_TIMEOUT;
 
 public class DriverFactory extends ExternalResource {
     private WebDriver driver;
     private MainPage mainPage;
+    private OrderPage orderPage;
+
 
     public WebDriver getDriver() {
         return driver;
@@ -18,6 +22,9 @@ public class DriverFactory extends ExternalResource {
     public MainPage getMainPage() {
         return mainPage;
     }
+
+    public OrderPage getOrderPage() {return orderPage;}
+
 
     public void initDriver() {
         if ("firefox".equals(System.getProperty("browser"))) {
@@ -28,6 +35,7 @@ public class DriverFactory extends ExternalResource {
 
         driver.get("https://qa-scooter.praktikum-services.ru/");
         mainPage = new MainPage(driver);
+        orderPage = new OrderPage(driver);
     }
 
     private void startChrome() {

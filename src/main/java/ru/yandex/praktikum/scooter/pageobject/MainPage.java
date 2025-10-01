@@ -8,7 +8,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.List;
-import static ru.yandex.praktikum.scooter.pageobject.util.EnvConfig.BASE_URL;
 import static ru.yandex.praktikum.scooter.pageobject.util.EnvConfig.EXPLICITY_TIMEOUT;
 
 public class MainPage {
@@ -29,18 +28,12 @@ public class MainPage {
     private final By faqQuestions = By.cssSelector(".accordion__heading");
     // Список ответов
     private final By faqAnswers = By.cssSelector(".accordion__panel");
-    //Кнопка закрытия баннера куки
-    private final By cookieButton = By.id("rcc-confirm-button");
 
-    //Методы
-    // Открытие страницы
-    public void open() {
-        driver.get(BASE_URL);
-    }
 
+    // Методы
     // Клик по кнопке "Заказать" сверху
     public void clickTopOrderButton() {
-        WebElement button = driver.findElement(By.xpath("//button[text()='Заказать']"));
+        WebElement button = driver.findElement(topOrderButton);
         new WebDriverWait(driver, Duration.ofSeconds(EXPLICITY_TIMEOUT))
                 .until(ExpectedConditions.elementToBeClickable(button))
                 .click();
@@ -66,16 +59,11 @@ public class MainPage {
 
         List<WebElement> answers = driver.findElements(faqAnswers);
         WebElement answer = answers.get(index);
-        wait.until(d -> answer.getAttribute("hidden") == null);
-        return answer.getText();
+
+        wait.until(ExpectedConditions.visibilityOf(answer));
+        return answer.getText().trim();
     }
 
-    //Закрытие куки
-    public void acceptCookies() {
-        if (!driver.findElements(cookieButton).isEmpty()) {
-            driver.findElement(cookieButton).click();
-        }
-    }
 }
 
 
