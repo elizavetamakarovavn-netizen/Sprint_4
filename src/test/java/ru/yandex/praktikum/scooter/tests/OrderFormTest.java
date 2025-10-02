@@ -77,8 +77,7 @@ public class OrderFormTest {
         orderPage.setComment(comment);
         orderPage.clickOrder();
 
-        boolean isModalDisplayed = orderPage.isModalHeaderDisplayed();
-        assertTrue("Ожидалось, что появится попап 'Хотите оформить заказ', но он не появился", isModalDisplayed);
+        orderPage.waitForModalHeader();
 
         orderPage.confirmOrder();
 

@@ -128,11 +128,10 @@ public class OrderPage {
     // Клик по кнопке "Заказать"
     public void clickOrder() {driver.findElement(orderButton).click();}
 
-    // Проверка появления заголовка попапа "Хотите оформить заказ?"
-    public boolean isModalHeaderDisplayed() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(EXPLICITY_TIMEOUT));
-        WebElement header = wait.until(ExpectedConditions.visibilityOfElementLocated(modalHeader));
-        return header.isDisplayed();
+    // Ожидание появления заголовка попапа "Хотите оформить заказ?"
+    public void waitForModalHeader() {
+        new WebDriverWait(driver, Duration.ofSeconds(EXPLICITY_TIMEOUT))
+                .until(ExpectedConditions.visibilityOfElementLocated(modalHeader));
     }
 
     // Клик по кнопке "Да" в попапе
